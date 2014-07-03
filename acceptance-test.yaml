@@ -1,0 +1,15 @@
+- job:
+    name: "acceptance-test"
+    logrotate:
+       numToKeep: 20
+    triggers:
+      - timed: "H/5 * * * *"
+    properties:
+      - copyartifact:
+          projects: "non-functional-test"
+    builders:
+      - shell:
+          !include-raw at_runner.sh
+    publishers:
+      - archive:
+          artifacts: "AT-last-success"

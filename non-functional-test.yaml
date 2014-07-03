@@ -1,0 +1,18 @@
+- job:
+    name: "non-functional-test"
+    logrotate:
+       numToKeep: 20
+    triggers:
+      - timed: "H/5 * * * *"
+    properties:
+      - copyartifact:
+          projects: "stage-test"
+    builders:
+      - copyartifact:
+          project: "acceptance-test"
+          filter: "AT-last-success"
+      - shell:
+          !include-raw nft_runner.sh
+    publishers:
+      - archive:
+          artifacts: "NFT-last-success"
