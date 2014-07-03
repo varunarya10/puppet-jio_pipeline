@@ -12,7 +12,7 @@
           project: "acceptance-test"
           filter: "AT-last-success"
       - shell:
-          !include-raw nft_runner.sh
+          !include-raw run_nft.sh
     publishers:
       - archive:
           artifacts: "NFT-last-success"
