@@ -9,7 +9,7 @@
           projects: "non-functional-test"
     builders:
       - shell:
-          !include-raw at_runner.sh
+          !include-raw run_acceptance.sh
     publishers:
       - archive:
           artifacts: "AT-last-success"
