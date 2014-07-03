@@ -1,9 +1,19 @@
 #!/bin/bash -ex
+
+# TODO(ynshenoy): remove hard-coding with values pulled from config
+REPOSERVER="10.135.126.13"
+PROXY="http://10.135.121.138:3128"
+
+# Deal with the proxy stuff on the dev/stage servers
+export http_proxy=$PROXY
+export https_proxy=$PROXY
+export no_proxy="localhost,127.0.0.1,10.1.1.2"
+
 LASTTESTED=0
 if [ -e AT-last-tested ]; then
     LASTTESTED=`cat AT-last-tested | cut -d'v' -f2`
 fi
-wget http://10.135.126.13/snapshots/latest-snapshot
+wget http://$REPOSERVER/snapshots/latest-snapshot
 REPOLATEST=`cat latest-snapshot | cut -d'v' -f2`
 rm -f latest-snapshot 2> /dev/null
 
@@ -16,10 +26,6 @@ elif [ $LASTTESTED -gt $REPOLATEST ]; then
 fi
 
 echo running tempest test for v$REPOLATEST
-
-export http_proxy=http://10.135.121.138:3128
-export https_proxy=http://10.135.121.138:3128
-export no_proxy=localhost,127.0.0.1,10.1.1.2
 
 if [[ ! -e tempest ]]; then
     git clone http://github.com/openstack/tempest
