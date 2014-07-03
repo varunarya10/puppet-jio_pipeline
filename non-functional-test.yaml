@@ -3,7 +3,7 @@
     logrotate:
        numToKeep: 20
     triggers:
-      - timed: "H/5 * * * *"
+      - timed: "H/15 * * * *"
     properties:
       - copyartifact:
           projects: "stage-test"

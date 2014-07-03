@@ -13,7 +13,7 @@ LASTTESTED=0
 if [ -e AT-last-tested ]; then
     LASTTESTED=`cat AT-last-tested | cut -d'v' -f2`
 fi
-wget http://$REPOSERVER/snapshots/latest-snapshot
+wget http://$REPOSERVER/snapshots/latest-snapshot --no-cache
 REPOLATEST=`cat latest-snapshot | cut -d'v' -f2`
 rm -f latest-snapshot 2> /dev/null
 
