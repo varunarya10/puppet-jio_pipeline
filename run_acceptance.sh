@@ -39,7 +39,7 @@ fi
 cp /home/rushi/dummy.tempest.conf etc/tempest.conf
  ./run_tempest.sh -N -- run tempest.cli.simple_read_only.test_keystone.SimpleReadOnlyKeystoneClientTest
 
-
+cd ..
 echo tempest test successful!
 
 echo v$REPOLATEST > AT-last-tested
