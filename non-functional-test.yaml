@@ -11,8 +11,14 @@
       - copyartifact:
           project: "acceptance-test"
           filter: "AT-last-success"
+      - copyartifact:
+          project: "non-functional-test"
+          filter: "NFT-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
       - shell:
           !include-raw run_nft.sh
     publishers:
       - archive:
-          artifacts: "NFT-last-success"
+          artifacts: "NFT-last-success,NFT-last-tested"
