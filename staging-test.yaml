@@ -9,7 +9,7 @@
           project: "non-functional-test"
           filter: "NFT-last-success"
       - copyartifact:
-          project: "stage-test"
+          project: "staging-test"
           filter: "STAGE-last-tested"
           which-build: permalink
           permalink: last
