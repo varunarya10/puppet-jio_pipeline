@@ -1,0 +1,21 @@
+- job:
+    name: "staging-test"
+    logrotate:
+       numToKeep: 50
+    triggers:
+      - timed: "@daily"
+    builders:
+      - copyartifact:
+          project: "non-functional-test"
+          filter: "NFT-last-success"
+      - copyartifact:
+          project: "stage-test"
+          filter: "STAGE-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - shell:
+          !include-raw run_stage.sh
+    publishers:
+      - archive:
+          artifacts: "STAGE-last-success,STAGE-last-tested"
