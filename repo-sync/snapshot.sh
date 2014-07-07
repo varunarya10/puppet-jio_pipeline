@@ -13,7 +13,7 @@ mkdir -p "${SNAPDIR}"
 
 if test -d "${SNAPDIR}/latest"
 then
-	CURRSNAPNUMBER=`readlink -f "${SNAPDIR}/latest" | cut -d'v' -f2`
+	CURRSNAPNUMBER=`readlink "${SNAPDIR}/latest" | cut -d'v' -f2`
 	SNAPNAME=v$(($CURRSNAPNUMBER+1))
 	echo snapname is $SNAPNAME
 
