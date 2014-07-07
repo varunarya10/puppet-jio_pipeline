@@ -33,7 +33,7 @@ if [ "$OLDMD5" == "$NEWMD5" ]; then
     echo "time: `date`. No new packages found" >> $STATUSFILE
     echo "Old and new MD5: $OLDMD5 $NEWMD5" >> $STATUSFILE
 else
-    ./home/rushi/scripts/periodic-check.sh $SNAPSRC $SNAPDEST
+    ./home/rushi/scripts/snapshot.sh $SNAPSRC $SNAPDEST
     echo "time: `date`. New packages found." >> $STATUSFILE
     echo "Old and new MD5: $OLDMD5 $NEWMD5" >> $STATUSFILE
 fi
