@@ -12,14 +12,14 @@
 # a cron easily.
 
 MIRRORCONF=/etc/apt/mirror.list
-MIRRORSRC=/home/repo/repo/mirror
-DIST=precise-security
-RELEASE=/home/repo/repo/mirror/security.ubuntu.com/ubuntu/dists/$DIST/Release
 
-SNAPSRC=/home/repo/repo/skel
-SNAPDEST=/home/rushi/repo/snapshots
+DIST=precise
+RELEASE=/home/repo/repo/mirror/jiocloud.rustedhalo.com/ubuntu/dists/$DIST/Release
 
-STATUSFILE=/home/rushi/repo/sync-status.txt
+SNAPSRC=/home/repo/repo
+SNAPDEST=/home/repo/repo-snapshots
+
+STATUSFILE=/home/repo/sync-status.txt
 
 OLDMD5=`cat $RELEASE | grep main/binary-amd64/Packages$ | head -1 | cut -d' ' -f2`
 
