@@ -19,22 +19,20 @@ RELEASE=/home/repo/repo/mirror/jiocloud.rustedhalo.com/ubuntu/dists/$DIST/Releas
 SNAPSRC=/home/repo/repo
 SNAPDEST=/home/repo/repo-snapshots
 
-STATUSFILE=/home/repo/sync-status.txt
-
 OLDMD5=`cat $RELEASE | grep main/binary-amd64/Packages$ | head -1 | cut -d' ' -f2`
 
-echo "---------------------------------------------" >> $STATUSFILE 
+echo "---------------------------------------------"
 
-echo `sudo apt-mirror $MIRRORCONF` >> $STATUSFILE
+sudo apt-mirror $MIRRORCONF
 
 NEWMD5=`cat $RELEASE | grep main/binary-amd64/Packages$ | head -1 | cut -d' ' -f2`
 
 if [ "$OLDMD5" == "$NEWMD5" ]; then
-    echo "time: `date`. No new packages found" >> $STATUSFILE
-    echo "Old and new MD5: $OLDMD5 $NEWMD5" >> $STATUSFILE
+    echo "time: `date`. No new packages found"
+    echo "Old and new MD5: $OLDMD5 $NEWMD5"
 else
     ./home/rushi/scripts/snapshot.sh $SNAPSRC $SNAPDEST
-    echo "time: `date`. New packages found." >> $STATUSFILE
-    echo "Old and new MD5: $OLDMD5 $NEWMD5" >> $STATUSFILE
+    echo "time: `date`. New packages found."
+    echo "Old and new MD5: $OLDMD5 $NEWMD5"
 fi
 
