@@ -1,19 +1,19 @@
 #!/bin/bash -ex
 
 # TODO(ynshenoy): remove hard-coding with values pulled from config
-REPOSERVER="10.135.126.13"
+REPOSERVER="10.135.126.13:81"
 PROXY="http://10.135.121.138:3128"
 
 # Deal with the proxy stuff on the dev/stage servers
 export http_proxy=$PROXY
 export https_proxy=$PROXY
-export no_proxy="localhost,127.0.0.1,10.1.1.2"
+export no_proxy="localhost,127.0.0.1,10.135.126.13,19.0.0.9"
 
 LASTTESTED=0
 if [ -e AT-last-tested ]; then
     LASTTESTED=`cat AT-last-tested | cut -d'v' -f2`
 fi
-wget http://$REPOSERVER/snapshots/latest-snapshot --no-cache
+wget http://$REPOSERVER/snapshots-temp/latest-snapshot --no-cache
 REPOLATEST=`cat latest-snapshot | cut -d'v' -f2`
 rm -f latest-snapshot 2> /dev/null
 
