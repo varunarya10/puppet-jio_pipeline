@@ -3,11 +3,12 @@
 # TODO(ynshenoy): remove hard-coding with values pulled from config
 REPOSERVER="10.135.126.13:81"
 PROXY="http://10.135.121.138:3128"
+DEVSTACK_IP=19.0.0.9
 
 # Deal with the proxy stuff on the dev/stage servers
 export http_proxy=$PROXY
 export https_proxy=$PROXY
-export no_proxy="localhost,127.0.0.1,10.135.126.13,19.0.0.9"
+export no_proxy="localhost,127.0.0.1,10.135.126.13,$DEVSTACK_IP"
 
 LASTTESTED=0
 if [ -e AT-last-tested ]; then
