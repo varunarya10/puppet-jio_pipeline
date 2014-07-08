@@ -12,7 +12,10 @@ Install `python-jenkins` and `jenkins-job-builder`
     pip install -e git+https://github.com/openstack-infra/jenkins-job-builder#egg=jenkins_job_builder
 
 
-A file `/etc/jenkins_jobs/jenkins_jobs.rst` should be created with the following contents (or any other username/password)
+Create a file `/etc/jenkins_jobs/jenkins_jobs.ini` with the following contents (or any other username/password)
+
+    [job_builder]
+    ignore_cache=True
 
     [jenkins]
     user=admin
