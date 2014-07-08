@@ -34,7 +34,6 @@ if [[ ! -e tempest ]]; then
 else
     cd tempest/
     git pull origin master
-    rm etc/tempest.conf
 fi
 
 # ASSUMPTION: tempest.conf for devstack VM is exposed from that machine, on port 81, at $DEVSTACK_IP:81/tempest.conf
