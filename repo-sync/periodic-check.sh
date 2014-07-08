@@ -27,12 +27,13 @@ sudo apt-mirror $MIRRORCONF
 
 NEWMD5=`cat $RELEASE | grep main/binary-amd64/Packages$ | head -1 | cut -d' ' -f2`
 
+echo "Old and new MD5: $OLDMD5 $NEWMD5"
+echo "Time: `date`"
+
 if [ "$OLDMD5" = "$NEWMD5" ]; then
-    echo "time: `date`. No new packages found"
-    echo "Old and new MD5: $OLDMD5 $NEWMD5"
+    echo "No new packages found"
 else
     ./home/rushi/scripts/snapshot.sh $SNAPSRC $SNAPDEST
-    echo "time: `date`. New packages found."
-    echo "Old and new MD5: $OLDMD5 $NEWMD5"
+    echo "New packages found."
 fi
 
