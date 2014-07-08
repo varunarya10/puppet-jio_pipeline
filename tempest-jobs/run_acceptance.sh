@@ -37,7 +37,12 @@ else
     rm etc/tempest.conf
 fi
 
-cp /home/rushi/dummy.tempest.conf etc/tempest.conf
+# ASSUMPTION: tempest.conf for devstack VM is exposed from that machine, on port 81, at $DEVSTACK_IP:81/tempest.conf
+# Still a temporary hack, but more easily reproducible than the previous one
+rm -f etc/tempest.conf* 2> /dev/null
+wget $DEVSTACK_IP:81/tempest.conf --no-cache
+mv tempest.conf etc/
+
  ./run_tempest.sh -N -- run tempest.cli.simple_read_only.test_keystone.SimpleReadOnlyKeystoneClientTest
 
 cd ..
