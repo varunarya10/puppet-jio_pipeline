@@ -32,7 +32,7 @@ echo "Time: `date`"
 if [ "$OLDMD5" = "$NEWMD5" ]; then
     echo "No new packages found"
 else
-    ./home/rushi/scripts/snapshot.sh $SNAPSRC $SNAPDEST
+    /home/rushi/scripts/snapshot.sh $SNAPSRC $SNAPDEST
     echo "New packages found."
 fi
 
