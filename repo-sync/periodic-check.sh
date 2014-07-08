@@ -8,8 +8,7 @@
 # Currently, you cannot specify more than one repository, or distribution to
 # take snapshot against.
 #
-# This script writes status to a file, so that this script can be added to
-# a cron easily.
+# This script writes status to STDOUT.
 
 MIRRORCONF=/etc/apt/mirror.list
 
