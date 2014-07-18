@@ -29,8 +29,20 @@ fi
 echo "Creating virtualized cloud in beta.jiocloud.com."
 echo "Version number is v$REPOLATEST (though not used)."
 
-source svnrc
-echo svn pass is $SVN_PASS
+source creds
+svn checkout https://10.135.121.138/svn/devops/automation/spawn_resources --username $SVN_USERNAME --password $SVN_PASSWORD
+cd spawn_resources
+bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -l
+
+echo "Virtualized cloud should be up now."
+echo "Deleting cloud.."
+
+bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -d
+
+echo "Virtualized cloud deleted."
+
+cd ..
+rm -rf spawn_resources
 
 echo "Virtualized env creation successful!"
 
