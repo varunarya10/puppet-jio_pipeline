@@ -2,12 +2,11 @@
     name: "staging-test"
     logrotate:
        numToKeep: 50
-    triggers:
-      - timed: "@daily"
+    block-upstream: true
     builders:
       - copyartifact:
-          project: "non-functional-test"
-          filter: "NFT-last-success"
+          project: "upgrade-test"
+          filter: "UPGRADE-last-success"
       - copyartifact:
           project: "staging-test"
           filter: "STAGE-last-tested"

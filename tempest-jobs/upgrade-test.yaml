@@ -1,0 +1,24 @@
+- job:
+    name: "upgrade-test"
+    logrotate:
+       numToKeep: 50
+    block-downstream: true
+    trigger-builds:
+      - project: "stage-test"
+    triggers:
+      - timed: "H/5 * * * *"
+    builders:
+      - copyartifact:
+          project: "non-functional-test"
+          filter: "NFT-last-success"
+      - copyartifact:
+          project: "upgrade-test"
+          filter: "UPGRADE-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - shell:
+          !include-raw run_upgrade.sh
+    publishers:
+      - archive:
+          artifacts: "UPGRADE-last-success,UPGRADE-last-tested"
