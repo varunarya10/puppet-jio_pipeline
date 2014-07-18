@@ -29,3 +29,5 @@ To configure jobs from yaml files, `cd` into the repository, and run
 
     jenkins-jobs update /path/to/yaml/file.yaml
 
+
+NOTE: For running the script `spawn_resources.bin`, you need to have the customized version of neutronclient installed, which you can get from contrail repo, located in the repo server `.60`. 
