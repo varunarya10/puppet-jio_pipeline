@@ -3,14 +3,20 @@
     logrotate:
        numToKeep: 50
     block-downstream: true
+    properties:
+      - copyartifact:
+          projects: "staging-test"
     trigger-builds:
-      - project: "stage-test"
+      - project: "staging-test"
     triggers:
       - timed: "H/5 * * * *"
     builders:
       - copyartifact:
           project: "non-functional-test"
           filter: "NFT-last-success"
+      - copyartifact:
+          project: "stage-test"
+          filter: "STAGING-last-success"
       - copyartifact:
           project: "upgrade-test"
           filter: "UPGRADE-last-tested"
