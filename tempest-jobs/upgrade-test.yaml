@@ -3,6 +3,15 @@
     logrotate:
        numToKeep: 50
     block-downstream: true
+    parameters:
+    - text:
+        name: "base_version"
+        default: "use_artifact"
+        description: "The base version to upgrade from. Defaults to the artifact copied from the staging-test job."
+    - text:
+        name: "target_version"
+        default: "use_artifact"
+        description: "The target version to upgrade to. Defaults to the artifact copied from the non-functional-test job."
     properties:
       - copyartifact:
           projects: "staging-test"
@@ -15,8 +24,11 @@
           project: "non-functional-test"
           filter: "NFT-last-success"
       - copyartifact:
-          project: "stage-test"
-          filter: "STAGING-last-success"
+          project: "staging-test"
+          filter: "staging-version"
+          which-build: permalink
+          permalink: last
+          optional: true
       - copyartifact:
           project: "upgrade-test"
           filter: "UPGRADE-last-tested"
