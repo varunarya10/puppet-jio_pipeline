@@ -4,6 +4,7 @@
 REPOSERVER="10.135.126.13:81"
 PROXY="http://10.135.121.138:3128"
 DEVSTACK_IP=19.0.0.9
+SNAPDIR=snapshots-temp
 
 # Deal with the proxy stuff on the dev/stage servers
 export http_proxy=$PROXY
@@ -14,7 +15,7 @@ LASTTESTED=0
 if [ -e AT-last-tested ]; then
     LASTTESTED=`cat AT-last-tested | cut -d'v' -f2`
 fi
-wget http://$REPOSERVER/snapshots-temp/latest-snapshot --no-cache
+wget http://$REPOSERVER/$SNAPDIR/latest-snapshot --no-cache
 REPOLATEST=`cat latest-snapshot | cut -d'v' -f2`
 rm -f latest-snapshot 2> /dev/null
 
