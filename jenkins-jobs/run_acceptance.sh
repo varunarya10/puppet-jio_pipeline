@@ -31,14 +31,18 @@ echo "Creating virtualized cloud in beta.jiocloud.com."
 echo "Version number is v$REPOLATEST (though not used)."
 
 source creds
-svn checkout https://10.135.121.138/svn/devops/automation/spawn_resources --username $SVN_USERNAME --password $SVN_PASSWORD
-cd spawn_resources
-bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -l
+
+git checkout http://10.135.126.20:81/devops-shell.git
+cd devops-shell/spawn_resources/source
+bash makebin.sh
+cd ..
+chmod 777 spawn_resources.bin
+bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -t test_acceptance -l -n $REPOLATEST
 
 echo "Virtualized cloud should be up now."
 echo "Deleting cloud.."
 
-bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -d
+bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -t test_acceptance -d
 
 echo "Virtualized cloud deleted."
 
