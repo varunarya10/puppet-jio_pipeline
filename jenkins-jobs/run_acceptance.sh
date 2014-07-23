@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 # TODO(ynshenoy): remove hard-coding with values pulled from config
-REPOSERVER="10.135.126.13:81"
+REPOSERVER="10.135.126.20:81"
 PROXY="http://10.135.121.138:3128"
 DEVSTACK_IP=19.0.0.9
-SNAPDIR=snapshots-temp
+SNAPDIR=snapshots
 
 # Deal with the proxy stuff on the dev/stage servers
 export http_proxy=$PROXY
