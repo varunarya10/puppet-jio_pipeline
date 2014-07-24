@@ -2,15 +2,17 @@
     name: "staging-test"
     logrotate:
        numToKeep: 50
-    triggers:
-      - timed: "@daily"
+    block-upstream: true
+    properties:
+      - copyartifact:
+          projects: "upgrade-test"
     builders:
       - copyartifact:
-          project: "non-functional-test"
-          filter: "NFT-last-success"
+          project: "upgrade-test"
+          filter: "UPGRADE-last-success"
       - copyartifact:
           project: "staging-test"
-          filter: "STAGE-last-tested"
+          filter: "STAGING-last-tested"
           which-build: permalink
           permalink: last
           optional: true
@@ -18,4 +20,4 @@
           !include-raw run_stage.sh
     publishers:
       - archive:
-          artifacts: "STAGE-last-success,STAGE-last-tested"
+          artifacts: "STAGING-last-success,STAGING-last-tested"

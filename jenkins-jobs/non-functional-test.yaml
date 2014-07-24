@@ -6,7 +6,7 @@
       - timed: "H/15 * * * *"
     properties:
       - copyartifact:
-          projects: "stage-test"
+          projects: "upgrade-test"
     builders:
       - copyartifact:
           project: "acceptance-test"
