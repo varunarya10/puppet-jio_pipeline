@@ -46,8 +46,8 @@ bash spawn_resources.bin -u $CLOUD_USERNAME -p $CLOUD_PASSWORD -t test_acceptanc
 
 echo "Virtualized cloud deleted."
 
-cd ..
-rm -rf spawn_resources
+cd ../..
+rm -rf devops-shell
 
 echo "Virtualized env creation successful!"
 
