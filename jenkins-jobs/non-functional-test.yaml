@@ -2,6 +2,11 @@
     name: "non-functional-test"
     logrotate:
        numToKeep: 20
+    parameters:
+    - text:
+        name: "snapshot_version"
+        default: "use_artifact"
+        description: "The snapshot version to deploy and test. Defaults to the artifact copied from the acceptance-test job."
     triggers:
       - timed: "H/15 * * * *"
     properties:

@@ -5,13 +5,13 @@
     block-downstream: true
     parameters:
     - text:
-        name: "base_version"
+        name: "base_snapshot"
         default: "use_artifact"
-        description: "The base version to upgrade from. Defaults to the artifact copied from the staging-test job."
+        description: "The base snapshot version to upgrade from. Defaults to the artifact copied from the staging-test job."
     - text:
-        name: "target_version"
+        name: "target_snapshot"
         default: "use_artifact"
-        description: "The target version to upgrade to. Defaults to the artifact copied from the non-functional-test job."
+        description: "The target snapshot version to upgrade to. Defaults to the artifact copied from the non-functional-test job."
     properties:
       - copyartifact:
           projects: "staging-test"
