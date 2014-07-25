@@ -1,0 +1,42 @@
+- job:
+    name: "upgrade-test"
+    logrotate:
+       numToKeep: 50
+    block-downstream: true
+    parameters:
+    - text:
+        name: "base_snapshot"
+        default: "use_artifact"
+        description: "The base snapshot version to upgrade from. Defaults to the artifact copied from the staging-test job."
+    - text:
+        name: "target_snapshot"
+        default: "use_artifact"
+        description: "The target snapshot version to upgrade to. Defaults to the artifact copied from the non-functional-test job."
+    properties:
+      - copyartifact:
+          projects: "staging-test"
+    trigger-builds:
+      - project: "staging-test"
+    triggers:
+      - timed: "H/5 * * * *"
+    builders:
+      - copyartifact:
+          project: "non-functional-test"
+          filter: "NFT-last-success"
+      - copyartifact:
+          project: "staging-test"
+          filter: "staging-version"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - copyartifact:
+          project: "upgrade-test"
+          filter: "UPGRADE-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - shell:
+          !include-raw run_upgrade.sh
+    publishers:
+      - archive:
+          artifacts: "UPGRADE-last-success,UPGRADE-last-tested"

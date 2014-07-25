@@ -1,0 +1,23 @@
+- job:
+    name: "acceptance-test"
+    logrotate:
+       numToKeep: 20
+    triggers:
+      - timed: "H/30 * * * *"
+    properties:
+      - copyartifact:
+          projects: "non-functional-test"
+    builders:
+      - copyartifact:
+          project: "acceptance-test"
+          filter: "AT-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - shell:
+          !include-raw generate_credentials.sh
+      - shell:
+          !include-raw run_acceptance.sh
+    publishers:
+      - archive:
+          artifacts: "AT-last-success,AT-last-tested"

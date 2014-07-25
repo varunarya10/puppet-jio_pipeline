@@ -1,0 +1,29 @@
+- job:
+    name: "non-functional-test"
+    logrotate:
+       numToKeep: 20
+    parameters:
+    - text:
+        name: "snapshot_version"
+        default: "use_artifact"
+        description: "The snapshot version to deploy and test. Defaults to the artifact copied from the acceptance-test job."
+    triggers:
+      - timed: "H/15 * * * *"
+    properties:
+      - copyartifact:
+          projects: "upgrade-test"
+    builders:
+      - copyartifact:
+          project: "acceptance-test"
+          filter: "AT-last-success"
+      - copyartifact:
+          project: "non-functional-test"
+          filter: "NFT-last-tested"
+          which-build: permalink
+          permalink: last
+          optional: true
+      - shell:
+          !include-raw run_nft.sh
+    publishers:
+      - archive:
+          artifacts: "NFT-last-success,NFT-last-tested"
