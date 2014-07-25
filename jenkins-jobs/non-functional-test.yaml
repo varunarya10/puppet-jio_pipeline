@@ -20,7 +20,7 @@
           project: "non-functional-test"
           filter: "NFT-last-tested"
           which-build: permalink
-          permalink: last
+          permalink: last-successful
           optional: true
       - shell:
           !include-raw run_nft.sh
