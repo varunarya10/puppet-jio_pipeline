@@ -47,3 +47,5 @@ cd devops-shell/new/upgrade
 echo "Upgrade successful. Now time to run tempest tests against it!"
 echo "Tempest tests successful! Done"
 
+./destroy.sh upgrade$$
+
