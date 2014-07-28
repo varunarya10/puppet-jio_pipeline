@@ -16,7 +16,19 @@ function get_snapshot_version {
 BASE_VERSION=$(get_snapshot_version $base_snapshot staging-version)
 TARGET_VERSION=$(get_snapshot_version $target_snapshot NFT-last-success)
 
+unset http_proxy https_proxy no_proxy
+
+if [ -e devops-shell ]; then
+  rm -rf devops-shell
+fi
+
 echo "base = ${BASE_VERSION} target = ${TARGET_VERSION}"
-echo "Temp Upgrade Job is running"
-sleep 10
-echo "Temp Upgrade Job is done"
+
+git clone ssh://root@10.135.126.20/var/www/devops-shell.git -b new-script
+cd devops-shell/new/upgrade
+./generate-userdata.sh -b $BASE_VERSION -u $TARGET_VERSION
+./spawn.sh upgrade$$
+
+echo "Upgrade successful. Now time to run tempest tests against it!"
+echo "Tempest tests successful! Done"
+
