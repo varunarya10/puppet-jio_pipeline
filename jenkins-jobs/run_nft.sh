@@ -40,6 +40,8 @@ AT_LATEST=$(get_target_version $snapshot_version AT-last-success)
 
 if [ $LASTTESTED -eq $AT_LATEST ]; then
     echo nothing new to test
+    echo v$AT_LATEST > NFT-last-tested
+    echo v$AT_LATEST > NFT-last-success
     exit 0
 elif [ $LASTTESTED -gt $AT_LATEST ]; then
     echo LASTTESTED is greater than AT_LATEST!!
