@@ -23,17 +23,27 @@
       - copyartifact:
           project: "non-functional-test"
           filter: "NFT-last-success"
+          which-build: permalink
+          permalink: last-successful
       - copyartifact:
           project: "staging-test"
           filter: "staging-version"
           which-build: permalink
-          permalink: last
+          permalink: last-successful
           optional: true
       - copyartifact:
           project: "upgrade-test"
           filter: "UPGRADE-last-tested"
           which-build: permalink
-          permalink: last
+          permalink: last-successful
+          target: lastsuccess
+          optional: true
+      - copyartifact:
+          project: "upgrade-test"
+          filter: "UPGRADE-last-tested"
+          which-build: permalink
+          permalink: last-unsuccessful
+          target: lastunsuccess
           optional: true
       - shell:
           !include-raw run_upgrade.sh
