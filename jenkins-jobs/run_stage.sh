@@ -29,7 +29,7 @@ UPGRADE_LATEST=`cat UPGRADE-last-success | cut -d'v' -f2`
 if [ $LASTTESTED -eq $UPGRADE_LATEST ]; then
     echo nothing new to test
     echo v$LASTTESTED > STAGE-last-tested
-    echo v$LASTTESTED > stage-version
+    echo v$LASTTESTED > staging-version
     exit 0
 elif [ $LASTTESTED -gt $UPGRADE_LATEST ]; then
     echo LASTTESTED is greater than NFT_LATEST!!
@@ -41,4 +41,4 @@ echo Tests successful!
 
 echo v$UPGRADE_LATEST > STAGE-last-tested
 echo v$UPGRADE_LATEST > STAGE-last-success
-echo v$UPGRADE_LATEST > stage-version
+echo v$UPGRADE_LATEST > staging-version
