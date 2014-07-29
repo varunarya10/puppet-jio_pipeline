@@ -30,4 +30,4 @@
           !include-raw run_stage.sh
     publishers:
       - archive:
-          artifacts: "STAGING-last-success,STAGING-last-tested"
+          artifacts: "staging-version,STAGING-last-success,STAGING-last-tested"
