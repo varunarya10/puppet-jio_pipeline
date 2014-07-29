@@ -46,7 +46,8 @@ LASTTESTED=$(get_last_tested)
 if [ $BASE_VERSION -eq -1 ]
 then
     echo "No base (stage) version available, nothing to test."
-    echo v$TARGET_VERSION >> UPGRADE-last-tested
+    echo v$TARGET_VERSION > UPGRADE-last-tested
+    echo v$TARGET_VERSION > UPGRADE-last-success
     exit 0
 fi
 

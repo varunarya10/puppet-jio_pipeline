@@ -3,9 +3,9 @@
 function get_last_tested {
     local SNAP_VER=0
     local VER1=0
-    local ARTIFACT1="lastsuccess/STAGE-last-tested"
+    local ARTIFACT1="lastsuccess/STAGING-last-tested"
     local VER2=0
-    local ARTIFACT2="lastunsuccess/STAGE-last-tested"
+    local ARTIFACT2="lastunsuccess/STAGING-last-tested"
     if [ -e $ARTIFACT1 ]
     then
         VER1=`cat $ARTIFACT1 | cut -d'v' -f2`
@@ -28,7 +28,7 @@ UPGRADE_LATEST=`cat UPGRADE-last-success | cut -d'v' -f2`
 
 if [ $LASTTESTED -eq $UPGRADE_LATEST ]; then
     echo nothing new to test
-    echo v$LASTTESTED > STAGE-last-tested
+    echo v$LASTTESTED > STAGING-last-tested
     echo v$LASTTESTED > staging-version
     exit 0
 elif [ $LASTTESTED -gt $UPGRADE_LATEST ]; then
@@ -39,6 +39,6 @@ fi
 echo Running automated staging tests for v$UPGRADE_LATEST
 echo Tests successful!
 
-echo v$UPGRADE_LATEST > STAGE-last-tested
-echo v$UPGRADE_LATEST > STAGE-last-success
+echo v$UPGRADE_LATEST > STAGING-last-tested
+echo v$UPGRADE_LATEST > STAGING-last-success
 echo v$UPGRADE_LATEST > staging-version
