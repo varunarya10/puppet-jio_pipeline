@@ -23,7 +23,7 @@ Create a file `/etc/jenkins_jobs/jenkins_jobs.ini` with the following contents (
     url=http://localhost:8080/
 
 
-Install 'copy artifact' plugin. If not able to install from web UI, download it from `https://updates.jenkins-ci.org/download/plugins/`.
+Install the 'Copy Artifact' and 'Parameterized Trigger' plugins. If not able to install from web UI, download them from `https://updates.jenkins-ci.org/download/plugins/`.
 
 To configure jobs from yaml files, `cd` into the repository, and run
 
