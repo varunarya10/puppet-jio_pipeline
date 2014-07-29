@@ -38,6 +38,8 @@ function get_last_tested {
     echo "$SNAP_VER" 
 }
 
+WSPACE_DIR=`pwd`
+
 # Figure out the base and target versions
 BASE_VERSION=$(get_snapshot_version $base_snapshot staging-version)
 TARGET_VERSION=$(get_snapshot_version $target_snapshot NFT-last-success)
@@ -57,6 +59,8 @@ then
     exit 1
 fi
 
+if [ $TARGET_VERSION == 'use_artifact' ]
+then
 if [ $LASTTESTED -eq $TARGET_VERSION ]
 then
     echo "Nothing new to test"
@@ -68,6 +72,10 @@ then
     echo "LASTTESTED is greater than TARGET_VERSION"
     exit 2
 fi
+fi
+
+cd $WSPACE_DIR
+echo v$TARGET_VERSION > UPGRADE-last-tested
 
 unset http_proxy https_proxy no_proxy
 
@@ -87,5 +95,6 @@ echo "Tempest tests successful! Done"
 
 ./destroy.sh upgrade$$
 
+cd $WSPACE_DIR
 echo v$TARGET_VERSION > UPGRADE-last-tested
 echo v$TARGET_VERSION > UPGRADE-last-success

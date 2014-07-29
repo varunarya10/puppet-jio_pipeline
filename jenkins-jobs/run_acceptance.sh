@@ -39,6 +39,7 @@ function get_last_tested {
     echo "$SNAP_VER" 
 }
 
+WSPACE_DIR=`pwd`
 ## Deal with the proxy stuff on the dev/stage servers
 #export http_proxy=$PROXY
 #export https_proxy=$PROXY
@@ -55,6 +56,11 @@ REPOLATEST=$(get_target_version $snapshot_version latest-snapshot)
 #REPOLATEST=`cat latest-snapshot | cut -d'v' -f2`
 rm -f latest-snapshot 2> /dev/null
 
+# Skip the check of whether there is a new version if we were asked to
+# test a specific version.
+if [ $snapshot_version == 'use_artifact' ]
+then
+
 if [ $LASTTESTED -eq $REPOLATEST ]; then
     echo nothing new to test
     echo v$REPOLATEST > AT-last-tested
@@ -65,9 +71,13 @@ elif [ $LASTTESTED -gt $REPOLATEST ]; then
     echo v$REPOLATEST > AT-last-tested
     exit 2
 fi
+fi # $snapshot_version != 'use_artifact'
 
 echo "Creating virtualized cloud in beta.jiocloud.com."
-echo "Version number is v$REPOLATEST (though not used)."
+echo "Version number is v$REPOLATEST"
+# Record the last tested version
+cd $WSPACE_DIR
+echo v$REPOLATEST > AT-last-tested
 
 source creds
 
@@ -120,6 +130,6 @@ echo "Virtualized env creation successful!"
 #cd ..
 #echo tempest test successful!
 
-echo v$REPOLATEST > AT-last-tested
+cd $WSPACE_DIR
 echo v$REPOLATEST > AT-last-success
 

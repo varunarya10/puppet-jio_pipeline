@@ -35,9 +35,15 @@ function get_last_tested {
     echo "$SNAP_VER" 
 }
 
+WSPACE_DIR=`pwd`
+
 LASTTESTED=$(get_last_tested)
 AT_LATEST=$(get_target_version $snapshot_version AT-last-success)
 
+# Skip checks of last tested version if we were asked to test a specific 
+# version.
+if [ $snapshot_version == 'use_artifact' ]
+then
 if [ $LASTTESTED -eq $AT_LATEST ]; then
     echo nothing new to test
     echo v$AT_LATEST > NFT-last-tested
@@ -47,9 +53,14 @@ elif [ $LASTTESTED -gt $AT_LATEST ]; then
     echo LASTTESTED is greater than AT_LATEST!!
     exit 2
 fi
+fi
+
 
 echo Running non-functional tests for v$AT_LATEST
 echo Tests successful!
 
+cd $WSPACE_DIR
 echo v$AT_LATEST > NFT-last-tested
+
+## Real test invocation should go here
 echo v$AT_LATEST > NFT-last-success

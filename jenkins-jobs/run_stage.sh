@@ -35,10 +35,12 @@ elif [ $LASTTESTED -gt $UPGRADE_LATEST ]; then
     echo LASTTESTED is greater than NFT_LATEST!!
     exit 2
 fi
+WSPACE_DIR=`pwd`
 
 echo Running automated staging tests for v$UPGRADE_LATEST
 echo Tests successful!
 
+cd $WSPACE_DIR
 echo v$UPGRADE_LATEST > STAGING-last-tested
 echo v$UPGRADE_LATEST > STAGING-last-success
 echo v$UPGRADE_LATEST > staging-version
