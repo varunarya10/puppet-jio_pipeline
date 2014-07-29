@@ -15,8 +15,6 @@
     properties:
       - copyartifact:
           projects: "staging-test"
-    trigger-builds:
-      - project: "staging-test"
     triggers:
       - timed: "H/5 * * * *"
     builders:
@@ -47,6 +45,8 @@
           optional: true
       - shell:
           !include-raw run_upgrade.sh
+      - trigger-builds:
+          - project: "staging-test"
     publishers:
       - archive:
           artifacts: "UPGRADE-last-success,UPGRADE-last-tested"
