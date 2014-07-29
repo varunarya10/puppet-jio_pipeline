@@ -58,6 +58,7 @@ rm -f latest-snapshot 2> /dev/null
 if [ $LASTTESTED -eq $REPOLATEST ]; then
     echo nothing new to test
     echo v$REPOLATEST > AT-last-tested
+    echo v$REPOLATEST > AT-last-success
     exit 0
 elif [ $LASTTESTED -gt $REPOLATEST ]; then
     echo LASTTESTED is greater than REPOLATEST!!
