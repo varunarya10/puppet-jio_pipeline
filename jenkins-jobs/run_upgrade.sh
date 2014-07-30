@@ -59,7 +59,7 @@ then
     exit 1
 fi
 
-if [ $TARGET_VERSION == 'use_artifact' ]
+if [ $target_snapshot == 'use_artifact' ]
 then
 if [ $LASTTESTED -eq $TARGET_VERSION ]
 then
