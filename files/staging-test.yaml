@@ -10,14 +10,24 @@
       - copyartifact:
           project: "upgrade-test"
           filter: "UPGRADE-last-success"
+          which-build: permalink
+          permalink: last-successful
       - copyartifact:
           project: "staging-test"
           filter: "STAGING-last-tested"
           which-build: permalink
-          permalink: last
+          permalink: last-successful
+          target: lastsuccess
+          optional: true
+      - copyartifact:
+          project: "staging-test"
+          filter: "STAGING-last-tested"
+          which-build: permalink
+          permalink: last-unsuccessful
+          target: lastunsuccess
           optional: true
       - shell:
-          !include-raw run_staging.sh
+          !include-raw run_stage.sh
     publishers:
       - archive:
-          artifacts: "STAGING-last-success,STAGING-last-tested"
+          artifacts: "staging-version,STAGING-last-success,STAGING-last-tested"
