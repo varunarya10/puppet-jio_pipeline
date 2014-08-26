@@ -23,11 +23,17 @@ Create a file `/etc/jenkins_jobs/jenkins_jobs.ini` with the following contents (
     url=http://localhost:8080/
 
 
-Install 'copy artifact' plugin. If not able to install from web UI, download it from `https://updates.jenkins-ci.org/download/plugins/`.
+Install the 'Copy Artifact' and 'Parameterized Trigger' plugins. If not able to install from web UI, download them from `https://updates.jenkins-ci.org/download/plugins/`.
 
 To configure jobs from yaml files, `cd` into the repository, and run
 
     jenkins-jobs update /path/to/yaml/file.yaml
 
 
-NOTE: For running the script `spawn_resources.bin`, you need to have the customized version of neutronclient installed, which you can get from contrail repo, located in the repo server `.60`. 
+NOTE: For running the script `spawn_resources.bin`, you need to have the
+customized version of neutronclient installed, which you can get from contrail
+repo, located in the repo server at `10.135.96.60`. Also, you need to install
+`python-glanceclient`. Do it like so: `sudo apt-get install glance`.
+
+NOTE: In order for the Jenkins jobs to function properly, atleast two snapshots
+need to be present in snapshots directory.

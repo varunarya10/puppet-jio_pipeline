@@ -2,6 +2,11 @@
     name: "acceptance-test"
     logrotate:
        numToKeep: 20
+    parameters:
+    - text:
+        name: "snapshot_version"
+        default: "use_artifact"
+        description: "The snapshot version to deploy and test. Defaults to the latest version from the repository."
     triggers:
       - timed: "H/30 * * * *"
     properties:
@@ -12,7 +17,15 @@
           project: "acceptance-test"
           filter: "AT-last-tested"
           which-build: permalink
-          permalink: last
+          permalink: last-successful
+          target: lastsuccess
+          optional: true
+      - copyartifact:
+          project: "acceptance-test"
+          filter: "AT-last-tested"
+          which-build: permalink
+          permalink: last-unsuccessful
+          target: lastunsuccess
           optional: true
       - shell:
           !include-raw generate_credentials.sh
@@ -21,3 +34,4 @@
     publishers:
       - archive:
           artifacts: "AT-last-success,AT-last-tested"
+          allow-empty: true
