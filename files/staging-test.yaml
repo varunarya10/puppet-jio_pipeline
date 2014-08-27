@@ -27,7 +27,7 @@
           target: lastunsuccess
           optional: true
       - shell:
-          !include-raw run_stage.sh
+          !include-raw run_staging.sh
     publishers:
       - archive:
           artifacts: "staging-version,STAGING-last-success,STAGING-last-tested"
